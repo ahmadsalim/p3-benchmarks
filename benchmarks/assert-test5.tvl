@@ -1,0 +1,9 @@
+root Person {
+  group allOf {
+    opt A,
+    opt B,
+    opt C,
+    opt D,
+    opt E
+  }
+}
