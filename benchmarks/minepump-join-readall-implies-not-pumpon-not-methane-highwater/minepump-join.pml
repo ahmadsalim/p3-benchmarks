@@ -179,4 +179,5 @@ active proctype watersensor ()
     od
 }
 
-ltl { [](!pumpOn || (pstate == running)) }
+ltl {  (([]<> (readMsg == commandMsg)) && ([]<> (readMsg == alarmMsg)) && ([]<> (readMsg == levelMsg))) ->
+        (!<>[] (!pumpOn && !methane && (waterLevel == high))) }

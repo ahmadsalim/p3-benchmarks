@@ -179,4 +179,4 @@ active proctype watersensor ()
     od
 }
 
-ltl { [](!pumpOn || (pstate == running)) }
+ltl { [] ((!pumpOn && (waterLevel == low) && <>(waterLevel == high)) -> ((!pumpOn) U (waterLevel == high))) }

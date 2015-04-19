@@ -30,3 +30,8 @@
 
 # SPIN Promela output
 pan*
+*.trail
+
+# Temporary files
+*.tmp
+*.swp
