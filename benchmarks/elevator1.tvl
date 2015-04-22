@@ -1,0 +1,13 @@
+root Elevator {
+	group [0..*] {
+    Determined,
+		Empty,
+		Exec,
+		OpenIfIdle,
+		Overload,
+		Park,
+		QuickClose,
+		Shuttle,
+		TTFull
+	}
+}

@@ -33,5 +33,6 @@ pan*
 *.trail
 
 # Temporary files
+*.tmp.*
 *.tmp
 *.swp
