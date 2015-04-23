@@ -1,0 +1,2 @@
+Feature: !High
+Property: (([]<> readCommand) && ([]<> readAlarm) && ([]<> readLevel)) -> !(<>[](pumpOn && methane))
