@@ -1,0 +1,19 @@
+root Person {
+  group allOf {
+    opt A,
+    opt B,
+    opt C,
+    opt D,
+    opt E,
+    opt F,
+    opt G,
+    opt H,
+    opt I,
+    opt J,
+    opt K,
+    opt L,
+    opt M,
+    opt N,
+    opt O
+  }
+}
