@@ -178,5 +178,12 @@ active proctype watersensor ()
                   }
     od
 }
-
-ltl { [] ((pstate == lowstop) -> !pumpOn) }
+never  {    /* !([] ((pstate == lowstop) -> !pumpOn)) */
+T0_init:
+	do
+	:: atomic { ((pstate == lowstop) && (pumpOn)) -> assert(!((pstate == lowstop) && (pumpOn))) }
+	:: (1) -> goto T0_init
+	od;
+accept_all:
+	skip
+}

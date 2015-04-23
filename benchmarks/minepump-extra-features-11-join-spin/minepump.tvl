@@ -1,5 +1,7 @@
 root MinePump {
   group allOf  {
+    opt New1,
+    opt New2,
     opt Standard,
     opt RaceCondOff,
     opt Command group someOf {

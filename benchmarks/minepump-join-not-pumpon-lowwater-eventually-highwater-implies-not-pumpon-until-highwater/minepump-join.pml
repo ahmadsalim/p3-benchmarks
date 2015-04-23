@@ -178,5 +178,23 @@ active proctype watersensor ()
                   }
     od
 }
-
-ltl { [] ((!pumpOn && (waterLevel == low) && <>(waterLevel == high)) -> ((!pumpOn) U (waterLevel == high))) }
+never  {    /* !([] ((!pumpOn && (waterLevel == low) && <>(waterLevel == high)) -> ((!pumpOn) U (waterLevel == high)))) */
+T0_init:
+	do
+	:: (! ((pumpOn)) && ! ((waterLevel == high)) && (waterLevel == low)) -> goto T0_S14
+	:: (! ((!pumpOn)) && ! ((pumpOn)) && ! ((waterLevel == high)) && (waterLevel == low)) -> goto T0_S2
+	:: (1) -> goto T0_init
+	od;
+T0_S14:
+	do
+	:: (! ((waterLevel == high))) -> goto T0_S14
+	:: (! ((!pumpOn)) && ! ((waterLevel == high))) -> goto T0_S2
+	od;
+T0_S2:
+	do
+	:: atomic { ((waterLevel == high)) -> assert(!((waterLevel == high))) }
+	:: (1) -> goto T0_S2
+	od;
+accept_all:
+	skip
+}

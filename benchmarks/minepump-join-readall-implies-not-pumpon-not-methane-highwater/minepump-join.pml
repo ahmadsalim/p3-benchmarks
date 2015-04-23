@@ -178,6 +178,127 @@ active proctype watersensor ()
                   }
     od
 }
-
-ltl {  (([]<> (readMsg == commandMsg)) && ([]<> (readMsg == alarmMsg)) && ([]<> (readMsg == levelMsg))) ->
-        (!<>[] (!pumpOn && !methane && (waterLevel == high))) }
+never  {    /* !((([]<> (readMsg == commandMsg)) && ([]<> (readMsg == alarmMsg)) && ([]<> (readMsg == levelMsg))) -> (!<>[] (!pumpOn && !methane && (waterLevel == high))) ) */
+T0_init:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	:: ((readMsg == alarmMsg)) -> goto T0_init
+	:: (1) -> goto T0_S5049
+	od;
+accept_S385:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T0_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	:: ((((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) || ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)))) -> goto T0_S385
+	od;
+accept_S2550:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T0_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	od;
+accept_S3797:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T0_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T0_S385
+	od;
+T3_S385:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T3_S385
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S385
+	od;
+T3_S2550:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T3_S3797
+	od;
+T3_S3797:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T3_S385
+	od;
+T2_S385:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg)) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T2_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S385
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S385
+	od;
+T2_S2550:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg)) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T2_S3797
+	od;
+T2_S3797:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg)) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T2_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S385
+	od;
+T0_S385:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == levelMsg)) -> goto T2_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S385
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto T0_S385
+	od;
+T0_S2550:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	od;
+T0_S3797:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == levelMsg)) -> goto T2_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S385
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	od;
+T0_S5049:
+	do
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S2550
+	:: ((!pumpOn && !methane && (waterLevel == high))) -> goto T0_S3797
+	:: ((readMsg == alarmMsg)) -> goto T0_init
+	:: (1) -> goto T0_S5049
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg) && (readMsg == levelMsg)) -> goto accept_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg) && (readMsg == commandMsg)) -> goto T3_S3797
+	:: ((!pumpOn && !methane && (waterLevel == high)) && (readMsg == alarmMsg)) -> goto T2_S3797
+	od;
+}

@@ -196,6 +196,9 @@
 #define stateLowstop (pstate == lowstop)
 
   typedef features {
+    bool New1;
+    bool New2;
+    bool New3;
     bool Standard;
     bool RaceCondOff;
     bool Start;
@@ -358,6 +361,16 @@ active proctype methanealarm() {
 }
 
 active proctype methanesensor() {
+  int i = 0;
+  if :: f.New1 -> i++;
+     :: else -> skip;
+  fi;
+  if :: f.New2 -> i++;
+     :: else -> skip;
+  fi;
+  if :: f.New3 -> i++;
+     :: else -> skip;
+  fi;
   do	:: 	atomic {
     cMethane?_;
     if	::	methane;
