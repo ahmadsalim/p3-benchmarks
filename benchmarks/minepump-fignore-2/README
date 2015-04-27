@@ -1,0 +1,2 @@
+Property: (([]<> readCommand) && ([]<> readAlarm) && ([]<> readLevel)) -> !(<>[](pumpOn && methane))
+

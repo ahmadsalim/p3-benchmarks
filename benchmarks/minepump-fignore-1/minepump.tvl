@@ -1,0 +1,10 @@
+root MinePump {
+	group allOf  {
+		opt Command group [0..*] {
+			Start
+		},
+		WaterSensor group [0..*] {
+			High
+		}
+	}
+}
