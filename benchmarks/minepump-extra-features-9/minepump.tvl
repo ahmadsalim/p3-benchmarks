@@ -1,0 +1,19 @@
+root MinePump {
+  group allOf  {
+    opt Standard,
+    opt RaceCondOff,
+    opt Command group someOf {
+      Start,
+      Stop
+    },
+    opt MethaneSensor group someOf {
+      MethaneAlarm,
+      MethaneQuery
+    },
+    WaterSensor group [0..*] {
+      Low,
+      Normal,
+      High
+    }
+  }
+}
